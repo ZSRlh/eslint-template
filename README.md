@@ -22,7 +22,8 @@ eslint [options] [file|dir|glob}\*
 
 - --ext：检查代码（自己理解的。。。
 - --fix：自动修复问题
-  [Eslint 命令行](https://eslint.bootcss.com/docs/user-guide/command-line-interface)
+
+[Eslint 命令行](https://eslint.bootcss.com/docs/user-guide/command-line-interface)
 
 ## Prettier
 
@@ -38,14 +39,9 @@ npm intall --save-dev eslint-plugin-prettier
 
 ```json
 {
-  // ...
-  "plugins": [
-    ...
-    "prettier"
-  ],
+  "plugins": ["prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    // ...
+    "prettier/prettier": "error"
   }
 }
 ```
@@ -62,10 +58,9 @@ package.json 中配置：
 
 ```json
 {
-  "pre-commit": ["lint"], // git commit 时运行 npm run lint
+  "pre-commit": ["lint"],
   "scripts": {
-    // ...
-    "lint": "eslint --ext .js --ext .jsx src" // 检查代码是否符合eslint规则
+    "lint": "eslint --ext .js --ext .jsx src"
   }
 }
 ```
