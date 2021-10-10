@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Eslint + Prettier
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Eslint
 
-## Available Scripts
+##### 安装
 
-In the project directory, you can run:
+```bash
+npm install --save-dev eslint
+npm install --save-dev eslint-plugin-react
+npm install --save-dev eslint-plugin-react-hook
+npm install --save-dev eslint-plugin-import
+```
 
-### `yarn start`
+##### 配置
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Eslint 配置规则](https://eslint.org/docs/rules/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##### 命令行
 
-### `yarn test`
+使用以下格式运行 eslint：
+eslint [options] [file|dir|glob}\*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- --ext：检查代码（自己理解的。。。
+- --fix：自动修复问题
+  [Eslint 命令行](https://eslint.bootcss.com/docs/user-guide/command-line-interface)
 
-### `yarn build`
+## Prettier
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+eslint 配置中兼容了代码风格的配置项，可以通过引入 eslint 插件进行配置：
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm intall --save-dev prettier
+npm intall --save-dev eslint-config-prettier
+npm intall --save-dev eslint-plugin-prettier
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+引入插件后，在 .eslintrc.json 文件中作如下配置：
 
-### `yarn eject`
+```json
+{
+  // ...
+  "plugins": [
+    ...
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    // ...
+  }
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## git 提交前自动检查格式
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+插件：pre-commit
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm install --save-dev pre-commit
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+package.json 中配置：
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```json
+{
+  "pre-commit": ["lint"], // git commit 时运行 npm run lint
+  "scripts": {
+    // ...
+    "lint": "eslint --ext .js --ext .jsx src" // 检查代码是否符合eslint规则
+  }
+}
+```
